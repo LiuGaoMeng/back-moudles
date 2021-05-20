@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<properties>
+		<property name="_defaultDatabaseId" value="mysql"/><!--使用的数据库类型(目前仅支持oracle,mysql)-->
+	</properties>
+
+	<settings>
+		<!-- xml配置对于NULL值默认作为字符串来处理 -->
+		<setting name="jdbcTypeForNull" value="NULL"/>
+		<setting name="logImpl" value="LOG4J"/>
+		<setting name="callSettersOnNulls" value="true"/>
+		<setting name="cacheEnabled" value="true"></setting> <!--开启使用缓存-->
+		<setting name="mapUnderscoreToCamelCase" value="true"/>
+	</settings>
+	<typeAliases>
+
+	</typeAliases>
+	<typeHandlers>
+<!--		<typeHandler handler="com.augurit.water.util.OracleClobTypeHandlerCallback" javaType="java.lang.String" jdbcType="CLOB"  />-->
+	</typeHandlers>
+	<plugins>
+<!--				<plugin interceptor="com.github.pagehelper.PageHelper">-->
+		<plugin interceptor="com.github.pagehelper.PageInterceptor">
+			<!--<property name="dialect" value="oracle"/>-->
+			<property name="helperDialect" value="mysql"/>
+			<property name="offsetAsPageNum" value="true"/>
+			<property name="rowBoundsWithCount" value="true"/>
+			<property name="pageSizeZero" value="true"/>    <!--true表示 pageSize=0时候，返回全部-->
+		</plugin>
+	</plugins>
+
+
+	<databaseIdProvider type="DB_VENDOR">
+<!--		<property name="SQL Server" value="sqlserver"/>-->
+<!--		<property name="DB2" value="db2"/>-->
+<!--		<property name="Oracle" value="oracle" />-->
+		<property name="MySQL" value="mysql"/>
+	</databaseIdProvider>
+
+
+	<mappers>
+		<package name="com.augurit.**.mapper"/>
+	</mappers>
+</configuration>

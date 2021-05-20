@@ -1,0 +1,4 @@
+rootProject.name = 'awater-map-back'
+include 'map-display'
+include 'map-common'
+

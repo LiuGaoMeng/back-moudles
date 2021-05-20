@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.augurit.water.pathRoma.mapper.PathRomaMapper">
+    <resultMap id="romaMap" type="com.augurit.water.pathRoma.domain.PathRoma">
+        <id property="id" column="id" jdbcType="INTEGER"/>
+        <result property="endName" column="end_name" jdbcType="VARCHAR"/>
+        <result property="routePath" column="route_path" jdbcType="VARCHAR"/>
+        <result property="routeName" column="route_name" jdbcType="VARCHAR"/>
+        <result property="startName" column="start_name" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="fields">
+        id,route_path,start_name,end_name,route_name
+    </sql>
+    <select id="list" resultMap="romaMap">
+        select * from roma_record
+    </select>
+
+    <insert id="save" parameterType="com.augurit.water.pathRoma.domain.PathRoma">
+        INSERT INTO roma_record
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+
+            <if test="endName != null and endName!=''">
+                end_name,
+            </if>
+            <if test="routePath != null and routePath !=''">
+                route_path,
+            </if>
+            <if test="routeName != null and routeName !=''">
+                route_name,
+            </if>
+            <if test="startName != null and startName != ''">
+                start_name,
+            </if>
+        </trim>
+        <trim prefix="VALUES(" suffix=")" suffixOverrides=",">
+
+            <if test="endName != null and endName!=''">
+                #{endName,jdbcType=VARCHAR},
+            </if>
+            <if test="routePath != null and routePath !='' ">
+                #{routePath,jdbcType=VARCHAR},
+            </if>
+            <if test="routeName != null and routeName !=''">
+                #{routeName,jdbcType=VARCHAR},
+            </if>
+            <if test="startName != null and startName != ''">
+                #{startName,jdbcType=VARCHAR},
+            </if>
+        </trim>
+
+    </insert>
+    <select id="getById" parameterType="int" resultMap="romaMap">
+        select t.* from roma_record t where t.id=#{id}
+    </select>
+
+</mapper>

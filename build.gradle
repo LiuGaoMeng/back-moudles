@@ -1,0 +1,148 @@
+plugins {
+    id 'org.springframework.boot' version '2.4.5'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+}
+
+group = 'com.augurit.water'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '1.8'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-web-services'
+    runtimeOnly 'mysql:mysql-connector-java'
+    runtimeOnly 'org.postgresql:postgresql'
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.security:spring-security-test'
+}
+
+test {
+    useJUnitPlatform()
+}
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+//    apply plugin: "com.arenagod.gradle.MybatisGenerator"
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+    repositories {
+        mavenLocal()
+//        mavenCentral()
+        maven {
+            url 'http://maven.aliyun.com/nexus/content/groups/public/'
+        }
+    }
+
+    dependencies {
+        compile fileTree(include: ['*.jar'], dir: '..\\lib')
+        runtime('org.springframework.boot:spring-boot-devtools')
+        compile('org.springframework.boot:spring-boot-starter-web')
+        compile('org.springframework.boot:spring-boot-starter-data-jpa')
+        compile('org.springframework.boot:spring-boot-starter-security')
+        compile('org.apache.commons:commons-lang3:3.7')
+        compile('javax.servlet:jstl:1.2')
+        compile('javax.servlet.jsp:jsp-api:2.2')
+        compile('org.springframework.boot:spring-boot-starter-websocket')
+
+       // compile('org.springframework.cloud:spring-cloud-starter-oauth2')
+
+        compile('io.jsonwebtoken:jjwt:0.7.0')
+
+        compile('org.apache.httpcomponents:httpclient:4.5.3')
+        compile group: 'org.quartz-scheduler', name: 'quartz', version: '2.2.1'
+        compile('org.hibernate:hibernate-core:5.2.16.Final')
+        compile('org.hibernate:hibernate-entitymanager:5.2.16.Final')
+        compile('org.hibernate:hibernate-validator:6.0.13.Final')
+        compile('org.codehaus.jackson:jackson-mapper-asl:1.9.13')
+        compile('org.springframework:spring-context-support')
+        compile('commons-beanutils:commons-beanutils:1.8.3')
+        compile('commons-codec:commons-codec:1.7')
+        compile('commons-collections:commons-collections:3.2.1')
+        compile('com.alibaba:fastjson:1.2.41')
+//        compile('com.fasterxml.jackson.core:jackson-annotations:2.9.1')
+//        compile('com.fasterxml.jackson.core:jackson-core:2.9.1')
+//        compile('com.fasterxml.jackson.core:jackson-databind:2.9.1')
+        compile(group: 'commons-httpclient', name: 'commons-httpclient', version: '3.0.1')
+        //日志
+        compile('org.slf4j:log4j-over-slf4j:1.7.25')
+        compile 'io.springfox:springfox-swagger-ui:2.9.2'
+        compile ('io.springfox:springfox-swagger2:2.9.2'){
+            exclude group: 'io.swagger', module: 'swagger-models'
+        }
+        compile 'io.swagger:swagger-models:1.5.21'
+
+        compile('org.springframework.mobile:spring-mobile-device:1.1.4.RELEASE')
+        compile('com.fasterxml.uuid:java-uuid-generator:3.1.5')
+        compile('org.apache.httpcomponents:httpmime:4.5.5')
+        compile('commons-io:commons-io:2.5')
+        compile('com.alibaba:druid:1.1.9')
+        compile('joda-time:joda-time:2.9.9')
+        compile(group: 'org.mybatis.spring.boot', name: 'mybatis-spring-boot-starter', version: '1.3.2')
+        compile(group: 'org.mybatis.generator', name: 'mybatis-generator-core', version: '1.3.5')
+        compile('com.github.pagehelper:pagehelper:5.1.2')
+        compile("mysql:mysql-connector-java:5.1.34")
+//        compile('org.springframework.data:spring-data-redis:2.0.8.RELEASE')
+//        compile('redis.clients:jedis:2.9.0')
+        testCompile('org.springframework.boot:spring-boot-starter-test')
+
+        compile('org.hibernate:hibernate-ehcache:5.2.16.Final')
+        compile('org.springframework.boot:spring-boot-starter-freemarker:2.0.1.RELEASE')
+        compile('org.apache.poi:poi:3.15')
+        compile('org.apache.poi:poi-ooxml:3.15')
+        compile('net.sf.ezmorph:ezmorph:1.0.6')
+        compile group: 'com.google.code.gson', name: 'gson', version: '2.8.5'
+
+        compile("org.aspectj:aspectjweaver:1.8.13")
+        compile('com.janeluo:ikanalyzer:2012_u6')
+        compile('commons-lang:commons-lang:2.6')
+        compile('jmagick:jmagick:6.2.4')
+        compile('org.json:json:20180130')
+        compile('org.htmlparser:htmlparser:1.6')
+
+        compile('com.fasterxml.uuid:java-uuid-generator:3.1.5')
+        compile('org.apache.httpcomponents:httpmime:4.5.5')
+        compile('org.tinyjee.jgraphx:jgraphx:1.10.4.1')
+        runtime("org.apache.tomcat.embed:tomcat-embed-jasper")
+        //compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-hystrix-dashboard', version: '1.1.3.RELEASE'
+        //compile group: 'org.springframework.cloud', name: 'spring-cloud-starter-netflix-hystrix', version: '1.4.0.RELEASE'
+        implementation group: 'org.springframework.boot', name: 'spring-boot-starter-activemq', version: '2.3.1.RELEASE'
+
+    }
+
+    jar.enabled = true
+
+    configurations {
+        mybatisGenerator
+
+    }
+
+//    mybatisGenerator {
+//        verbose = true
+//        configFile = 'src/main/resources/generator/generatorConfig.xml'
+//    }
+
+    ext {
+        springCloudVersion = 'Finchley.SR1'
+    }
+
+//    dependencyManagement {
+//        imports {
+//            mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+//        }
+//    }
+}
